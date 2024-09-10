@@ -10,6 +10,8 @@ public class controller : MonoBehaviour
 
      public float forwardSpeed = 1f;
 
+     public int life = 3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,18 @@ public class controller : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy")){
+            life=life-1;
+
+            if(life==0){
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+
+            GameObject.Destroy(other.gameObject);
+           
+        }
+
+        if (other.gameObject.CompareTag("Finish")){
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
