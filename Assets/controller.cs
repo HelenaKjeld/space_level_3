@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class controller : MonoBehaviour
 {
@@ -38,6 +39,13 @@ public class controller : MonoBehaviour
         {
             var direction = gameObject.GetComponent<Rigidbody>().velocity.normalized;
             gameObject.GetComponent<Rigidbody>().velocity = direction * maxSpeed;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy")){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
