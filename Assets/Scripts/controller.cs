@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +7,9 @@ public class controller : MonoBehaviour
      public float maxSpeed = 1f;
 
      public float forwardSpeed = 1f;
+
+    public GameObject spawnerFollow;
+    public GameObject[] cracks;
 
      public int life = 3;
 
@@ -21,6 +22,12 @@ public class controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        cracks[0].SetActive(life <= 3);
+        cracks[1].SetActive(life <= 2);
+        cracks[2].SetActive(life <= 1);
+
+        spawnerFollow.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         transform.position += Vector3.forward * Time.deltaTime * forwardSpeed;
 
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
@@ -54,7 +61,10 @@ public class controller : MonoBehaviour
             }
 
             GameObject.Destroy(other.gameObject);
-           
+
+
+
+
         }
 
         if (other.gameObject.CompareTag("Finish")){
